@@ -12,7 +12,7 @@ CONFIG_DIR = Path(BASE_DIR, "config")
 LOGS_DIR = Path(BASE_DIR, "logs")
 
 # Data Directories
-DATA_DIR = Path("/data/DATASCI")
+DATA_DIR = Path("/data")
 RAW_DATA = Path(DATA_DIR, "raw")
 INTERMEDIATE_DIR = Path(DATA_DIR, "intermediate")
 RESULTS_DIR = Path(DATA_DIR, "results")
@@ -47,13 +47,19 @@ CHAT = ChatOpenAI(
 
 
 DEPARTMENTS = [
-    "Anesthesiology",
     "Microbiology/Immun/Virology",
     "Neurosciences",
-    "Dentistry",
-    "Radiology",
     "Physiology",
-    "Surgery",
+    "Pathology",
+    "Pharmacology",
+    "Pediatrics",
+    "Nutrition",
+    "Genetics",
+    "Biostatistics & Other Math Sci",
+    "Biomedial Engineering",
+    "Biology",
+    "Biochemistry",
+    "Anatomy/Cell Biology"
 ]
 
 REQUEST_CONFIG = {
