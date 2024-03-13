@@ -48,11 +48,11 @@ AIMS_HUMAN_TEMPLATE = """The specific aims of your next project you want to get 
 
 {query}
 
-Prepare the specific aims page for your grant application. Below is a guide you wrote explaining what should be in each paragraph.
+Prepare the specific aims page for your grant application. Below is a guide you wrote explaining what should be in each paragraph. The guide should inform you of the structure of the aims, and the content is an example. Use the above aims to fill in the content with accuracy. The aims below should not be used.
 
 The Specific Aims segment is paramount in NIH grant applications. It's where you must win over reviewers, stressing your project's importance and establishing your team's credibility. It essentially acts as a snapshot of the entire grant.
 
-Introduction
+The aims should include an opening paragraph, a second paragraph, the aims (with at least 2-3 sentences describing the details, and a conclusion statement. Any scientific information below is simply there to provide an example of the structure of the writing.
 
 The opening paragraph should immediately grasp the reviewers' interest by:
 
@@ -60,7 +60,7 @@ Opening Statement: Briefly lay out your research's importance.
 Existing Knowledge: Succinctly summarize the current knowledge in the area.
 Knowledge Gap: Clearly define the missing information and how your research aims to bridge it. Use typographic emphasis sparingly.
 Critical Need: Highlight the urgency of the issue you're addressing and how your research proposes an evolutionary step in the domain.
-Example: Viruses contribute to a significant proportion of human cancers. One such virus, HTLV-1, leads to adult T cell leukemia/lymphoma (ATLL). Its oncoprotein, Tax, affects key cellular processes but its transformation mechanism remains unclear. Our research intends to address this knowledge gap.
+An example is: Viruses contribute to a significant proportion of human cancers. One such virus, HTLV-1, leads to adult T cell leukemia/lymphoma (ATLL). Its oncoprotein, Tax, affects key cellular processes but its transformation mechanism remains unclear. Our research intends to address this knowledge gap.
 
 Second Paragraph: The Solution
 
@@ -70,29 +70,25 @@ Long-Term Goal: Highlight your overarching vision, ensuring it aligns with the f
 Rationale: Describe the foundation for your main hypothesis.
 Qualifications: Succinctly establish why your team and approach are best suited.
 Hypothesis & Objectives: Clearly outline your testable hypothesis and project's primary objectives.
-Example: Our solution involves developing a novel mouse model system for studying Tax's role in tumorigenesis. This aligns with findings from Lck-Tax transgenic mice. Our improved approach promises consistent wild-type and mutant Tax protein expression levels.
+An example is: Our solution involves developing a novel mouse model system for studying Tax's role in tumorigenesis. This aligns with findings from Lck-Tax transgenic mice. Our improved approach promises consistent wild-type and mutant Tax protein expression levels.
 
 Aims
 
-Detail each goal that tests your hypothesis:
+Choose a clear, active title for each aim (like below). Briefly discuss the experimental approach and expected outcomes in 2-3 sentences.
 
-Title: Choose a clear, active title for each aim.
-Summary: Briefly discuss the experimental approach and expected outcomes.
-Organization: Utilize headings or bullets for clarity.
-Example:
-
+The below aims are examples:
 Aim 1: Develop an innovative mouse model for HTLV-1 Tax tumorigenesis.
 Aim 2: Investigate mutations affecting Tax functions and their implications for tumorigenesis.
 Conclusion
 
-Close with a broad perspective:
+Close with a broad perspective and discuss the below. Also review the example (denoted by "Example:").
 
 Innovation: State the uniqueness of your project.
 Expected Outcomes: Detail anticipated results.
 Impact: Emphasize the broader implications of your project's success.
 Example: Our research offers an upgraded mouse model that addresses the current shortcomings, enhancing understanding of HTLV-1 Tax tumorigenesis. This model can be a pivotal resource for future scientific endeavors, unlocking avenues hitherto inaccessible.
 
-Format your response as markdown using body text only, limiting to one page with room for a small figure on that page. Avoid section headers. Otherwise, phrase and format your response to be copied into a grant proposal for the NIH.
+Lastly, format your response as markdown using body text only, limiting to one page with room for a small figure on that page. Avoid section headers. Otherwise, phrase and format your response to be copied into a grant proposal for the NIH.
 
 """
 
@@ -103,7 +99,7 @@ aims_chat_prompt = ChatPromptTemplate.from_messages(
 )
 
 # TODO try without "brief"
-SUMMARY_HUMAN_TEMPLATE = """ Use the following Specific Aims page from an NIH-style grant application to prepare a project summary/ abstract for the application.
+SUMMARY_HUMAN_TEMPLATE = """Use the following Specific Aims page from an NIH-style grant application to prepare a project summary/ abstract for the application.
 
 {sa_page}
 
