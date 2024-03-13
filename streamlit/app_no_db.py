@@ -25,8 +25,6 @@ def show_grant_guide_page(vectorstore=Grant_Guide_config.GRANT_VECTORSTORE):
 
     _Not approved for use with PHI._
 
-    All submissions are recorded for potential review by departmental and health system personnel.
-
     ---
     """)
 
@@ -47,7 +45,7 @@ def show_grant_guide_page(vectorstore=Grant_Guide_config.GRANT_VECTORSTORE):
 
     with tab2:
         st.write("Get an AI-generated draft of your specific aims page and project summary/abstract.")
-        aims = st.text_area("Enter your specific aims:", height=300, key="aims_for_page")
+        aims = st.text_area("Enter your specific aims:", height=300, key="aims_for_page") # TODO: Insert placeholder aims
 
         if st.button("Draft specific aims page"):
             with st.spinner("Drafting. This may take a few minutes..."):
@@ -85,19 +83,45 @@ def show_grant_guide_page(vectorstore=Grant_Guide_config.GRANT_VECTORSTORE):
                     st.download_button(label="Download strategy element draft", data=strategy_docx_data, file_name=f"DRAFT_{research_strategy_part}.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
 
     with tab4:
-            st.write("Assistance with drafting F-Style (Fellowship) Grant applications.")
-            f_grant_aims = st.text_area("Enter the key points of your Fellowship application:", height=300, key="f_grant_aims")
+        st.write("Get an AI-generated draft for parts of your F-Style (Fellowship) Grant application.")
 
-            if st.button("Generate F-Style Draft", key="f_style_draft"):
-                with st.spinner("Generating draft for F-Style Grant..."):
+        f_grant_part = st.selectbox(
+            "Which part of the F-Style Grant do you need help with?",
+            ["Select a section"] + list(Grant_Guide_config.prefilled_text.keys()),  # Assuming you have similar prefilled text for F-Style Grants
+            key="f_grant_part"
+        )
+
+        if f_grant_part != "Select a section":
+            f_strategy_bullets = st.text_area(
+                "Please address the following and replace the text in the box. **We suggest copying the instructions into a Word Doc and pasting your response when done.**",
+                value=Grant_Guide_config.prefilled_text[f_grant_part],
+                height=650,
+                key="f_strategy_bullets"
+            )
+
+            if st.button("Draft F-Style Grant part", key="f_draft_part"):
+                with st.spinner("Preparing draft for F-Style Grant part..."):
                     submit_time = datetime.datetime.now()
-                    # Assuming you have a function to generate F-Style grant content
-                    f_grant_result = grant_generate.get_f_grant_response(f_grant_aims)
+                    f_strategy_result = grant_generate.get_strategy_response(
+                        bullet_points=f_strategy_bullets,
+                        rs_part=f_grant_part,
+                        instructions=Grant_Guide_config.prefilled_text[f_grant_part]
+                    )
                     response_time = datetime.datetime.now()
-                    st.markdown(f_grant_result.content)
-                    st.success("Your F-Style Grant draft has been generated.")
 
-                    # Optional: Implement any additional functionality such as downloading the draft as a document
+                    output_text = Grant_boilerplate.CONTRACT + "# AI-generated text \n\n" + f_strategy_result.content
+                    f_strategy_docx_data = text_format.convert_markdown_docx(output_text)
+
+                    if f_strategy_docx_data:
+                        st.balloons()
+                        st.write("Note that once you hit download, this form will reset.")
+                        st.download_button(
+                            label="Download F-Style Grant part draft",
+                            data=f_strategy_docx_data,
+                            file_name=f"DRAFT_{f_grant_part}.docx",
+                            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        )
+
 
 if __name__ == "__main__":
     show_grant_guide_page()
